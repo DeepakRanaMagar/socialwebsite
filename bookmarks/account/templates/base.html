@@ -1,1 +1,23 @@
 {% load staticfiles %}
+<html>
+    <head>
+        <title>
+            {% block title %}
+            {% endblock title %}
+        </title>
+        <link herf="{% static 'css/base.css' %}" rel="stylesheet">
+    </head>
+    <body>
+        <div id="header">
+            <span class = "logo">Bookmarks</span>
+        </div>
+
+        <div idd="content">
+            
+            {% block content %}
+                
+            {% endblock content %}
+                
+        </div>
+    </body>
+</html>
