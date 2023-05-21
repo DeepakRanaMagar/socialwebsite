@@ -1,18 +1,18 @@
-{% load staticfiles %}
+{% load static %}
 <html>
     <head>
         <title>
             {% block title %}
             {% endblock title %}
         </title>
-        <link herf="{% static 'css/base.css' %}" rel="stylesheet">
+        <link href="{% static 'css/base.css' %}" rel="stylesheet">
     </head>
     <body>
         <div id="header">
             <span class = "logo">Bookmarks</span>
         </div>
 
-        <div idd="content">
+        <div id="content">
             
             {% block content %}
                 
