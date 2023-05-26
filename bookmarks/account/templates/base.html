@@ -9,7 +9,7 @@
     </head>
     <body>
         <div id="header" class="header-container">
-            <span class="logo">Bookmarks</span>
+            <span class="logo"><h3>Bookmarks</h3></span>
             
             {% if request.user.is_authenticated %}
                 <ul class="menu">
@@ -29,16 +29,16 @@
                     Hello {{ request.user.first_name }}
                     <a href="{% url 'logout' %}">Logout</a>
                 {% else %}
-                    <a href="{% url 'login' %}">Login</a>
+                    {% comment %} <a href="{% url 'login' %}">Login</a> {% endcomment %}
                 {% endif %}
             </span>            
         </div>
         
 
-        <div id="content">
+        <div id="content" >
             
             {% block content %}
-                
+            
             {% endblock content %}
                 
         </div>

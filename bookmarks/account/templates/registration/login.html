@@ -5,25 +5,20 @@
 {% endblock title %}
 
 {% block content %}
-    <h1>
-        Login
-    </h2>
-
-    {% if form.errors %}
-        <p>
-            Your username and password didn't match.
-        </p>
-    {% else %}
-        <p>
-            Fill the form to Login
-        </p>
-    {% endif %}
     <div class="login-form">
-        <form action = " {% url 'login' %}" method="post">
-            {{form.as_p}}
+        <h1 class="login">Login</h1>
+
+        {% if form.errors %}
+            <p>Your username and password didn't match.</p>
+        {% else %}
+            <p>Fill the form to Login</p>
+        {% endif %}
+        
+        <form action="{% url 'login' %}" method="post">
+            {{ form.as_p }}
             {% csrf_token %}
-            <input type = "hidden" name="next" value="{{ next }}"/>
-            <p><input type ="submit" value ="Login"></p>
+            <input type="hidden" name="next" value="{{ next }}"/>
+            <p><input type="submit" value="Login"></p>
         </form>
     </div>
 {% endblock content %}
