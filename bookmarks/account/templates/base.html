@@ -9,8 +9,7 @@
     </head>
     <body>
         <div id="header" class="header-container">
-            <span class="logo"><h3>Bookmarks</h3></span>
-            
+            <span class="logo"><h3>Bookmarks</h3></span>            
             {% if request.user.is_authenticated %}
                 <ul class="menu">
                     <li {% if section == "dashboard" %}class="selected"{% endif %}>
