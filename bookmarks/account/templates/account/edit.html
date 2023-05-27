@@ -1,0 +1,26 @@
+{% extends 'abse.html' %}
+
+{% block title %}
+    <title>
+        Edit your account
+    </title>
+{% endblock title %}
+    
+
+{% block content %}
+    <h1>
+        Edit your account
+    </h1>
+    <p>
+        Edit your account here.
+    </p>
+    <form action = '.' method = 'post' enctype = 'multipart/form-data'>
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+        {% csrf_token %}
+        <p>
+            <input type ='submit' value = 'Save changes'>
+        </p>
+    </form>
+{% endblock content %}
+    

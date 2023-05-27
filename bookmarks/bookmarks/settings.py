@@ -137,3 +137,7 @@ LOGOUT_URL = reverse_lazy('logout')
 
 # SMTP bypass
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#Media Setting
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path .join(BASE_DIR, 'media/')
