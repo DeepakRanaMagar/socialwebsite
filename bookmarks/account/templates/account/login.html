@@ -6,7 +6,8 @@
 
 {% block content %}
     <h1>Login</h1>   
-    <p>Please, Use the following form to login:</p>
+    
+    {% comment %} <p>Please, Use the following form to login.</p> {% endcomment %}
     <form action="." method="post">
         {{ form.as_p }}
         {% csrf_token %}
