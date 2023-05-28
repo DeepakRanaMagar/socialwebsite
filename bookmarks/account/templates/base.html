@@ -30,16 +30,28 @@
                 {% else %}
                     {% comment %} <a href="{% url 'login' %}">Login</a> {% endcomment %}
                 {% endif %}
-            </span>            
+            </span>    
+            <span class="message-sec">
+                
+                {% if messages %}
+                    <ul class = "messages">
+                        {% for message in messages %}
+                            <li class='{{ message.tags }}'>
+                                {{ message|safe }}
+                                <a href="#">🆇</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                    
+            </span>        
         </div>
         
 
         <div id="content" >
-            
             {% block content %}
             
             {% endblock content %}
-                
         </div>
     </body>
 </html>

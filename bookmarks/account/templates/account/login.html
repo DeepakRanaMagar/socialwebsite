@@ -9,8 +9,8 @@
     
     {% comment %} <p>Please, Use the following form to login.</p> {% endcomment %}
     <form action="." method="post">
-        {{ form.as_p }}
         {% csrf_token %}
+        {{ form.as_p }}
         <p>
             <input type = "submit" value = "Login">
         </p>
