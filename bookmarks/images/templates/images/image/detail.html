@@ -3,34 +3,63 @@
 {% block title %}
     {{ image.title }}
 {% endblock title %}
-    
 
 {% block content %}
-    <h1>{{image.title}}</h1>
-    <img src="{{ image.image.url}}" class = "image-detail">
-    
-    {% with total_likes=image.users_like.count  %}
+    <h1>{{ image.title }}</h1>
+    <img src="{{ image.image.url }}" class="image-detail">
+
+    {% with total_likes = image.users_like.count %}
         <div class="image-info">
             <div>
                 <span class="count">
-                    {{ total_likes}} like {{total_likes|pularize}}
+                    <span class="total">{{ total_likes }}</span> like{{ total_likes|pluralize }}
                 </span>
+                <a href="#" data-id="{{ image.id }}" data-action="{% if request.user not in image.users_like.all %}like{% else %}unlike{% endif %}" class="likebutton">
+                    {% if request.user not in image.users_like.all %}
+                        Like
+                    {% else %}
+                        Unlike
+                    {% endif %}
+                </a>
             </div>
-            {{image.description|linebreaks}}
+            {{ image.description|linebreaks }}
         </div>
         <div class="image-likes">
-            
-            {% for user in image.users_like.all  %}
+            {% for user in image.users_like.all %}
                 <div>
-                    <img src="{{user.profile.photo.url}}">
-                    <p>
-                        {{user.first_name}}
-                    </p>
+                    <img src="{{ user.profile.photo.url }}">
+                    <p>{{ user.first_name }}</p>
                 </div>
-                {% empty %}
-                    No likes yet
+            {% empty %}
+                No likes yet
             {% endfor %}
         </div>
     {% endwith %}
 {% endblock content %}
-    
+
+{% block domready %}
+    <script>
+        $(document).ready(function() {
+            $('a.likebutton').click(function(e) {
+                e.preventDefault();
+                var action = $(this).data('action');
+                var id = $(this).data('id');
+                var url = '{% url "images:like" %}';
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: {id: id, action: action},
+                    success: function(data) {
+                        if (data['status'] === 'ok') {
+                            var previous_action = $('a.likebutton').data('action');
+                            $('a.likebutton').data('action', previous_action === 'like' ? 'unlike' : 'like');
+                            $('a.likebutton').text(previous_action === 'like' ? 'Unlike' : 'Like');
+                            var previous_likes = parseInt($('span.count .total').text());
+                            $('span.count .total').text(previous_action === 'like' ? previous_likes + 1 : previous_likes - 1);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock domready %}
