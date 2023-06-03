@@ -2,25 +2,18 @@
 
 {% block title %}
     {{ image.title }}
-{% endblock title %}
+{% endblock %}
 
 {% block content %}
     <h1>{{ image.title }}</h1>
     <img src="{{ image.image.url }}" class="image-detail">
 
-    {% with total_likes = image.users_like.count %}
+    {% with total_likes=image.users_like.count %}
         <div class="image-info">
             <div>
                 <span class="count">
-                    <span class="total">{{ total_likes }}</span> like{{ total_likes|pluralize }}
+                    {{ total_likes }} like{{ total_likes|pluralize }}
                 </span>
-                <a href="#" data-id="{{ image.id }}" data-action="{% if request.user not in image.users_like.all %}like{% else %}unlike{% endif %}" class="likebutton">
-                    {% if request.user not in image.users_like.all %}
-                        Like
-                    {% else %}
-                        Unlike
-                    {% endif %}
-                </a>
             </div>
             {{ image.description|linebreaks }}
         </div>
@@ -31,11 +24,11 @@
                     <p>{{ user.first_name }}</p>
                 </div>
             {% empty %}
-                No likes yet
+                Nobody likes this image yet.
             {% endfor %}
         </div>
     {% endwith %}
-{% endblock content %}
+{% endblock %}
 
 {% block domready %}
     <script>
@@ -54,12 +47,12 @@
                             var previous_action = $('a.likebutton').data('action');
                             $('a.likebutton').data('action', previous_action === 'like' ? 'unlike' : 'like');
                             $('a.likebutton').text(previous_action === 'like' ? 'Unlike' : 'Like');
-                            var previous_likes = parseInt($('span.count .total').text());
-                            $('span.count .total').text(previous_action === 'like' ? previous_likes + 1 : previous_likes - 1);
+                            var previous_likes = parseInt($('span.count').text());
+                            $('span.count').text(previous_action === 'like' ? previous_likes + 1 : previous_likes - 1);
                         }
                     }
                 });
             });
         });
     </script>
-{% endblock domready %}
+{% endblock %}
