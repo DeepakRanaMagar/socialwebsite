@@ -1,0 +1,40 @@
+#bookmarklet {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  z-index: 9999;
+}
+
+#bookmarklet a#close {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #aaa;
+  font-size: 16px;
+  text-decoration: none;
+}
+
+#bookmarklet h1 {
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+#bookmarklet .images {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#bookmarklet .images a {
+  display: inline-block;
+  margin: 5px;
+}
+
+#bookmarklet .images img {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+}
